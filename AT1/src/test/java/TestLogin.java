@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginTest extends MainTest {
+public class TestLogin extends TestMain {
     UserPage userPage;
     GroupPage groupPage;
     String login = "89626800887";

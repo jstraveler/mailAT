@@ -8,12 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GroupPage {
+    int size;
     WebDriver driver;
     WebElement element;
     String autoCategory = ".//a[contains(@data-l,\"t,automoto\")]";
     String groupLocator = ".//div[contains(@data-l,\"groupId\")]";
     String imageLocator = ".//img[contains(@class, \"photo_img\")]";
     List<WebElement> avatarLocators;
+    List<GroupItem> groupItem;
     String autoMotoUrl = "https://ok.ru/groups/automoto";
 
     public GroupPage(WebDriver driver) {
@@ -23,21 +25,28 @@ public class GroupPage {
     public void checkCategory() {
         driver.findElement(By.xpath(autoCategory)).click();
         new WebDriverWait(driver, 3).until(ExpectedConditions.urlToBe(autoMotoUrl));
-        getAvatarLocators();
-        System.out.println(avatarLocators.size());
-        if(avatarLocators.size() > 0) {
-            for(WebElement locator : avatarLocators) {
-                element = locator.findElement(By.xpath(imageLocator));
-                if(element.isDisplayed()) {
-                    System.out.println(element.toString());
-                } else {
-                    System.out.println("element not found");
-                }
+        setSize();
+        setGroups();
+        System.out.println(size);
+        if (groupItem.size() > 0) {
+            for (GroupItem group : groupItem) {
+                for (WebElement element : group.listItem)
+                    if (element.isDisplayed()) {
+                        System.out.println(element.toString());
+                    } else {
+                        System.out.println("element not found");
+                    }
             }
         }
     }
 
-    public void getAvatarLocators() {
-        avatarLocators = driver.findElements(By.xpath(groupLocator));
+    public void setSize() {
+        size = driver.findElements(By.xpath(groupLocator)).size();
+    }
+
+    public void setGroups() {
+        for (int i = 0; i < size; i++) {
+            groupItem.add(new GroupItem(driver));
+        }
     }
 }

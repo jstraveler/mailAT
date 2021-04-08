@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends MainTest {
+public class LoginPage extends TestMain {
     WebDriver driver;
 
     String loginLocator = ".//input[@id=\"field_email\"]";

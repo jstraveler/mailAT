@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 
 
-public class MainTest {
+public class TestMain {
     public WebDriver driver;
     public String baseUrl;
     public boolean acceptNextAlert = true;
