@@ -25,6 +25,7 @@ public class GroupItem {
         findGroupItem();
     }
 
+    //mycomment
     private void findGroupItem() {
         for(String locator : groupLocators) {
             listItem.add(driver.findElement(By.xpath(locator)));
