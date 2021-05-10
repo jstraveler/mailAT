@@ -1,3 +1,5 @@
+package PageClasses;
+
 import org.openqa.selenium.WebElement;
 
 public class CardGroup {

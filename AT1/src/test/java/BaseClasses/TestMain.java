@@ -1,5 +1,8 @@
+package BaseClasses;
+
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 
 import org.junit.*;
 
@@ -10,6 +13,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import PageClasses.LoginPage;
 
 
 

@@ -1,6 +1,6 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+package PageClasses;
+
+import BaseClasses.TestMain;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,7 +11,7 @@ public class LoginPage extends TestMain {
     String passLocator = ".//input[@id=\"field_password\"]";
     String signInLocator = ".//input[@value=\"Войти в Одноклассники\"]";
 
-    LoginPage(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 

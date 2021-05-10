@@ -1,3 +1,5 @@
+package PageClasses;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +17,7 @@ public class GroupItem {
     String groupLocatorName = ".//a[contains(@class, \"group-name\")]"; // and contains(@title) Проверить наличие названия
     String groupLocatorFriendsInGroup = ".//div[contains(@class, \"friends-in-group\")]";
 
-    GroupItem(WebDriver driver) {
+    public GroupItem(WebDriver driver) {
         this.driver = driver;
         groupLocators.add(groupLocatorCard);
         groupLocators.add(groupLocatorPhoto);

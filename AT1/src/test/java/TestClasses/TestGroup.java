@@ -1,6 +1,7 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+package TestClasses;
+
+import BaseClasses.TestMain;
+import PageClasses.GroupPage;
 
 public class TestGroup extends TestMain {
 

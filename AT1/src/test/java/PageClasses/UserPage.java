@@ -1,11 +1,15 @@
+package PageClasses;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class UserPage {
+import java.util.Iterator;
+
+public class UserPage implements Iterable{
     WebDriver driver;
     String GROUP_PATH = ".//a[@data-l=\"t,userAltGroup\"]";
 
-    UserPage(WebDriver driver){
+    public UserPage(WebDriver driver){
         this.driver = driver;
         check();
     }
@@ -17,5 +21,10 @@ public class UserPage {
     public GroupPage moveToGroups() {
         driver.findElement(By.xpath(GROUP_PATH)).click();
         return new GroupPage(driver);
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
     }
 }

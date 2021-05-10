@@ -1,3 +1,5 @@
+package PageClasses;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GroupPage {
@@ -15,7 +16,7 @@ public class GroupPage {
     String autoCategory = ".//a[contains(@data-l,\"t,automoto\")]";
     String groupLocator = ".//div[contains(@data-l,\"groupId\")]";
     String imageLocator = ".//img[contains(@class, \"photo_img\")]";
-    List<WebElement> avatarLocators;
+    public List<WebElement> avatarLocators;
     List<GroupItem> groupItem;
     String autoMotoUrl = "https://ok.ru/groups/automoto";
     List<CardGroup> avatarCards = new ArrayList<>();
@@ -24,7 +25,7 @@ public class GroupPage {
         this.driver = driver;
     }
 
-    public void checkCategory() {
+    public void checkCategoryItem() {
         driver.findElement(By.xpath(autoCategory)).click();
         new WebDriverWait(driver, 3).until(ExpectedConditions.urlToBe(autoMotoUrl));
         setSize();
@@ -38,6 +39,23 @@ public class GroupPage {
                     } else {
                         System.out.println("element not found");
                     }
+            }
+        }
+    }
+
+    public void checkCategory() {
+        driver.findElement(By.xpath(autoCategory)).click();
+        new WebDriverWait(driver, 3).until(ExpectedConditions.urlToBe(autoMotoUrl));
+        getAvatarLocator();
+        System.out.println(avatarLocators.size());
+        if(avatarLocators.size() > 0) {
+            for(WebElement locator : avatarLocators) {
+                element = locator.findElement(By.xpath(imageLocator));
+                if(element.isDisplayed()) {
+                    System.out.println(element.toString());
+                } else {
+                    System.out.println("element not found");
+                }
             }
         }
     }
@@ -60,4 +78,19 @@ public class GroupPage {
 
         }
     }
+
+
+
+    public void getAvatarLocator() {
+        avatarLocators = driver.findElements(By.xpath(groupLocator));
+    }
+
+    public List<GroupItem> getGroupItem() {
+        return groupItem;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
 }
