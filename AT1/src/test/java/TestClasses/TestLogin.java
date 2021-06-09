@@ -2,7 +2,7 @@ package TestClasses;
 
 import BaseClasses.TestMain;
 import PageClasses.*;
-import org.junit.After;
+import org.junit.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +22,6 @@ import static com.google.common.truth.Truth8.*;
 
 public class TestLogin extends TestMain {
     UserPage userPage;
-    GroupPage groupPage;
-    String login = "89626800887";
-    String pass = "1478963";
 
     @Before
     public void start() {
@@ -32,25 +29,34 @@ public class TestLogin extends TestMain {
         get();
     }
 
-    /*@Test
-    public void test() {
+    //@Test
+    public void testLogin() {
         userPage = new LoginPage(driver).checkLogin(login, pass);
-
-        *//*assertWithMessage("TEST-1: Secret user subject was NOT null!")
-                .that(userPage)
-                .isEqualTo(new UserPage(null));*//*
-
-        groupPage = userPage.moveToGroups();
-
-        groupPage.checkCategory();
-
-        //Assert.assertTrue(String.valueOf(groupPage.avatarLocators.size()), groupPage.avatarLocators.size() > 12);
-        //assertThat(groupPage.avatarLocators.size()).isNotNull();
-        //assertThat(groupPage.avatarLocators).containsExactlyElementsIn(new ArrayList<>());
-
+        new WebDriverWait(userPage.getDriver(), 1).until(ExpectedConditions.urlToBe(userUrl));
+        assertThat(userPage.getDriver().getCurrentUrl())
+                .endsWith(userUrl);
+        assertThat(userPage).isNotNull();
     }
 
-    @Test
+    //@Test
+    public void testIncorrectLogin() {
+        userPage = new LoginPage(driver).checkLogin(login, "pass");
+        new WebDriverWait(userPage.getDriver(), 1);
+        assertThat(userPage.getDriver().getCurrentUrl())
+                .contains("error");
+        assertThat(userPage).isNotNull();
+    }
+
+    @After
+    public void stop() {
+        tearDown();
+    }
+}
+
+
+
+
+    /*@Test
     public void whenPageIsNull() {
         userPage = new LoginPage(driver).checkLogin(login, pass);
         assertThat(userPage).isNull();
@@ -77,7 +83,15 @@ public class TestLogin extends TestMain {
         assertThat(groupPage.getDriver().getCurrentUrl()).startsWith(groupUrl);
     }
 
-    @Test
+        Assert.assertTrue(String.valueOf(groupPage.avatarLocators.size()), groupPage.avatarLocators.size() > 12);
+        assertThat(groupPage.avatarLocators.size()).isNotNull();
+        assertThat(groupPage.avatarLocators).containsExactlyElementsIn(new ArrayList<>());
+        assertWithMessage("TEST-1: Secret user subject was NOT null!")
+                .that(userPage)
+                .isEqualTo(new UserPage(null));
+         */
+
+    /*@Test
     public void isURLCorrect() {
         userPage = new LoginPage(driver).checkLogin(login, pass);
         groupPage = userPage.moveToGroups();
@@ -85,7 +99,7 @@ public class TestLogin extends TestMain {
         assertThat(groupPage.avatarLocators).containsExactlyElementsIn(new ArrayList<>());
         assertThat(groupPage.avatarLocatorsMap).containsKey("Auto");
         assertThat(groupPage.avatarLocators).isEmpty();
-        assertThat(groupPage.avatarLocators).contains("Auto");
+        assertThat(groupPage.avatarLocators);
 
 
     }
@@ -98,12 +112,3 @@ public class TestLogin extends TestMain {
         Stream<Object> streamGroupItem = Stream.of(groupPage.avatarLocators.toArray());
         assertThat(streamGroupItem).containsNoDuplicates();
     }*/
-
-
-
-
-    @After
-    public void stop() {
-        tearDown();
-    }
-}
